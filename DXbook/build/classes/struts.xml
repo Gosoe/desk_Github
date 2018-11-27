@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+<struts>
+	<!-- 常亮设置 -->
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+	
+	<package name="adminManage" namespace="/" extends="struts-default">
+	<!-- 拦截器设置 -->
+<!-- 	<interceptors>
+		拦截器栈 ，配置在拦截器中
+		</interceptors> 
+-->
+		<global-results>
+			<result name="error">error.jsp</result>
+		</global-results>
+<!--		
+ 		<action name="adminAction" class="com.hp.action.AdminAction">
+				要想在页面传值，必须加默认的拦截器栈
+		    <interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success" type="redirect">adminAction!listAdmin</result>
+			<result name="listAdmin.jsp">listAdmin.jsp</result>
+			<result name="updateAdmin.jsp">updateAdmin.jsp</result>
+		</action> -->
+		<action name="AdminAction" class="com.dx.action.AdminAction">
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+			 <result name="adminMain">admin/adminMain.jsp</result>
+			 <result name="loginFailure">adminLogin.jsp</result>
+			 <result  name="recharge.jsp">admin/recharge.jsp</result>
+			 
+			 <result name="myInfo">admin/adminInfo.jsp</result>
+			 <result name="tomyInfo" type="redirect">AdminAction!myInfo</result>
+			 <result name="success">success.jsp</result>
+		</action>
+		
+		<action name="BookAction" class="com.dx.action.BookAction">
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+			 <result name="listAdminBook" type="redirect">BookAction!listAdminBook</result>
+			 <result  name="listAdminBook.jsp">admin/listAdminBook.jsp</result>
+			<result name="updateBook.jsp">admin/updateBook.jsp</result>
+			<result name="myUpload" type="redirect">BookAction!myUpload</result>
+			<result name="myUpload.jsp">${pageContext.request.contextPath }/user/myUpload.jsp</result>
+			<result name="index.jsp">${pageContext.request.contextPath }/index.jsp</result>
+			<!--  -->
+			<result name="bookDetail.jsp">${pageContext.request.contextPath}/book/bookDetail.jsp</result>
+			<result name="listMyBought" type="redirect">OrderAction!myShoppingHistory</result>
+			
+			<result name="library.jsp">admin/library.jsp</result>
+			<result name="listAllUserBookMethod" type="redirect">BookAction!listAllUserBook</result>
+			
+			 <!--余额不足，去充值  -->
+			 <result name="userCenter">${pageContext.request.contextPath}/user/userCenter.jsp</result>
+			<result name="success" type="redirect">success.jsp</result>
+		</action>
+		
+		<action name="UserAction" class="com.dx.action.UserAction">
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+			 <result name="listUser">admin/listUser.jsp</result>
+			 <result name="userRecharge.jsp">admin/userRecharge.jsp</result>
+			 <result name="listUserMethod" type="redirect">UserAction!listAllUser</result>
+			 <result name="index.jsp" type="redirect">index.jsp</result>
+			 <result name="userLoginFailure">login.jsp</result>
+			 <result name="login">login.jsp</result>
+			 <result name="userMyInfo">${pageContext.request.contextPath}/user/userCenter.jsp</result>
+			 <result name="userCenter.jsp">userCenter.jsp</result>
+			 <result name="index" type="redirect">BookAction!listAllBook</result>
+		</action>
+		
+		
+		<action name="OrderAction" class="com.dx.action.OrderAction">
+			 <interceptor-ref name="defaultStack"></interceptor-ref>
+			 <result name="myShoppingHistory.jsp">${pageContext.request.contextPath}/user/myShoppingHistory.jsp</result>
+			 <result name="listMyBought" type="redirect">OrderAction!myShoppingHistory</result>
+			 
+			 <result name="myOrder.jsp">${pageContext.request.contextPath}/user/myOrder.jsp</result>
+			 <result name="listMyOrder" type="redirect">OrderAction!myOrder</result>
+			 
+			 
+		</action>
+		
+		
+		
+		
+		
+	</package>
+</struts>
